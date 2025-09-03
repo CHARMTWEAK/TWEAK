@@ -12,6 +12,8 @@
             --dark-color: #0f172a;
             --light-color: #f8fafc;
             --gray-color: #94a3b8;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
         }
         
         * {
@@ -275,12 +277,47 @@
             text-align: center;
             border: 1px solid rgba(37, 99, 235, 0.3);
             backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* ملاحظة صغيرة فوق المنتجات */
+        .note-badge {
+            position: absolute;
+            top: 15px;
+            left: -5px;
+            background: var(--warning-color);
+            color: white;
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 0 4px 4px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        
+        .note-badge::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            border-left: 5px solid transparent;
+            border-top: 5px solid #d97706;
+        }
+        
+        .note-badge.popular {
+            background: var(--success-color);
+        }
+        
+        .note-badge.popular::after {
+            border-top-color: #059669;
         }
         
         .pricing-card h3 {
             font-size: 18px;
             margin-bottom: 12px;
             color: var(--light-color);
+            margin-top: 10px;
         }
         
         .price {
@@ -610,6 +647,11 @@
             .obs-card {
                 padding: 20px;
             }
+            
+            .note-badge {
+                font-size: 10px;
+                padding: 3px 8px;
+            }
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -678,6 +720,7 @@
                 </div>
                 
                 <div class="pricing-card">
+                    <div class="note-badge">الأكثر طلباً</div>
                     <h3>التويك بدون فورمات</h3>
                     <div class="price">119 <span>ريال سعودي</span></div>
                     <ul class="pricing-features">
@@ -690,6 +733,7 @@
                     <button class="primary-btn" onclick="window.open('https://discord.gg/gtcxsH4TCD', '_blank')">اطلب الآن</button>
                 </div>
                 <div class="pricing-card">
+                    <div class="note-badge popular">الأفضل أداءً</div>
                     <h3>التويك مع الفورمات</h3>
                     <div class="price">159 <span>ريال سعودي</span></div>
                     <ul class="pricing-features">
@@ -710,6 +754,7 @@
                 </div>
                 
                 <div class="pricing-card">
+                    <div class="note-badge">للأداء المتوسط</div>
                     <h3>تويك كود بدون فورمات</h3>
                     <div class="price">139 <span>ريال سعودي</span></div>
                     <ul class="pricing-features">
@@ -722,12 +767,13 @@
                     <button class="primary-btn" onclick="window.open('https://discord.gg/gtcxsH4TCD', '_blank')">اطلب الآن</button>
                 </div>
                 <div class="pricing-card">
+                    <div class="note-badge popular">للأداء الممتاز</div>
                     <h3>تويك كود مع الفورمات</h3>
                     <div class="price">179 <span>ريال سعودي</span></div>
                     <ul class="pricing-features">
                         <li>كل مزايا الباقة الأساسية</li>
                         <li>فورمات كامل وتنظيف العميق</li>
-                        <li>تثبيت وينdows نظيف </li>
+                        <li>تثبيت ويندوز نظيف </li>
                         <li>تجهيز النظام لأفضل أداء لكود</li>
                         <li>تعديل اعدادات البايوس</li>
                         <li>دعم فني 24 ساعة</li>
@@ -783,7 +829,7 @@
                         <i class="fas fa-gamepad"></i>
                     </div>
                     <h3>تعديل ملفات اللعبة</h3>
-                    <p>تعديل الملفات المخفية للعبة لجعل اللعب أكثر سلاسة وأقل استجابة</p>
+                    <p>تعديل الملفات مخفية للعبة لجعل اللعب أكثر سلاسة وأقل استجابة</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
@@ -874,7 +920,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="faq-answer">
-                        <p>الاستخدام مرة يعني تسوي التويك مرة وحدة بالجهaz ولو فرمت تشتري من جديد.</p>
+                        <p>الاستخدام مرة يعني تسوي التويك مرة وحدة بالجهاز ولو فرمت تشتري من جديد.</p>
                     </div>
                 </div>
 
@@ -910,7 +956,7 @@
             
             <div class="discord-box">
                 <h3>انضم إلى سيرفر الديسكورد</h3>
-                <p>انقر على الزر بالأسفل للانضمام إلى سيرفرنا وطلب الخدمة مباشرة من هناك</p>
+                <p>انقر على الزر بالأسفل للانضمام إلى سерверنا وطلب الخدمة مباشرة من هناك</p>
                 <a href="https://discord.gg/gtcxsH4TCD" class="discord-btn" target="_blank">
                     <i class="fab fa-discord"></i> انضم إلى الديسكورد
                 </a>
@@ -918,12 +964,6 @@
         </div>
     </section>
 
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-column">
-                    <h4>Charm Tweak</h4>
-                    <p>نقدم لكم أفضل خدمات تحسين أداء الألعاب وزيادة الفريمات لكل أنواع الأجهزة</p>
                 </div>
                 <div class="footer-column">
                     <h4>خدماتنا</h4>
@@ -1004,3 +1044,4 @@
     </script>
 </body>
 </html>
+
