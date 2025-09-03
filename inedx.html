@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Charm Tweak - لزيادة فريماتك وتحسين أداء الألعاب</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #3b82f6;
+            --accent-color: #00b4d8;
+            --dark-color: #0f172a;
+            --light-color: #f8fafc;
+            --gray-color: #94a3b8;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(to bottom, #0f172a, #1e293b);
+            color: var(--light-color);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        header {
+            background: rgba(15, 23, 42, 0.95);
+            padding: 12px 0;
+            border-bottom: 2px solid var(--primary-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links a {
+            color: var(--light-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 14px;
+        }
+        
+        .signup-btn {
+            padding: 6px 16px;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            border: none;
+            color: var(--light-color);
+            font-size: 14px;
+        }
+        
+        .signup-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+        }
+        
+        .hero {
+            padding: 40px 0;
+            text-align: center;
+        }
+        
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .hero h1 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero p {
+            font-size: 16px;
+            color: var(--gray-color);
+            max-width: 800px;
+            margin: 0 auto 25px;
+        }
+        
+        .mini-fps-comparison {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .mini-fps-card {
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: 8px;
+            padding: 15px;
+            width: 140px;
+            text-align: center;
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .mini-fps-card.before {
+            border-color: #ef4444;
+        }
+        
+        .mini-fps-card.after {
+            border-color: #10b981;
+        }
+        
+        .mini-fps-title {
+            font-size: 14px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .mini-fps-before {
+            color: #ef4444;
+        }
+        
+        .mini-fps-after {
+            color: #10b981;
+        }
+        
+        .mini-fps-counter {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 8px 0;
+            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .mini-fps-status {
+            font-size: 12px;
+            font-weight: 500;
+            padding: 4px 10px;
+            border-radius: 15px;
+            display: inline-block;
+        }
+        
+        .mini-status-bad {
+            background-color: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+        
+        .mini-status-good {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        
+        .primary-btn {
+            padding: 10px 24px;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 14px;
+            border: none;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: var(--light-color);
+        }
+        
+        .primary-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+        }
+        
+        .pricing {
+            padding: 40px 0;
+            background: rgba(15, 23, 42, 0.5);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .section-title h2 {
+            font-size: 24px;
+            margin-bottom: 12px;
+            color: var(--light-color);
+        }
+        
+        .section-title p {
+            color: var(--gray-color);
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 14px;
+        }
+        
+        .pricing-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            flex-wrap: wrap;
+        }
+        
+        .pricing-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        
+        .pricing-tab.active {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .pricing-content {
+            display: none;
+        }
+        
+        .pricing-content.active {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .pricing-card {
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: 10px;
+            padding: 25px 20px;
+            text-align: center;
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .pricing-card h3 {
+            font-size: 18px;
+            margin-bottom: 12px;
+            color: var(--light-color);
+        }
+        
+        .price {
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        
+        .price span {
+            font-size: 14px;
+            color: var(--gray-color);
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin: 20px 0;
+            text-align: right;
+            font-size: 14px;
+        }
+        
+        .pricing-features li {
+            padding: 8px 0;
+            color: var(--gray-color);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .obs-section {
+            padding: 40px 0;
+            background: rgba(15, 23, 42, 0.3);
+        }
+        
+        .obs-card {
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            backdrop-filter: blur(10px);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .obs-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: var(--light-color);
+        }
+        
+        .obs-price {
+            font-size: 36px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .obs-price span {
+            font-size: 16px;
+            color: var(--gray-color);
+        }
+        
+        .obs-description {
+            color: var(--gray-color);
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+        
+        .features {
+            padding: 40px 0;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .feature-card {
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.3s;
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+        }
+        
+        .feature-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(37, 99, 235, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+        
+        .feature-icon i {
+            font-size: 18px;
+            color: var(--primary-color);
+        }
+        
+        .feature-card h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: var(--light-color);
+        }
+        
+        .feature-card p {
+            color: var(--gray-color);
+            font-size: 14px;
+        }
+        
+        .faq-section {
+            padding: 40px 0;
+            background: rgba(15, 23, 42, 0.3);
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: rgba(30, 41, 59, 0.7);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .faq-question {
+            padding: 15px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 15px;
+        }
+        
+        .faq-question i {
+            transition: transform 0.3s;
+        }
+        
+        .faq-answer {
+            padding: 0 15px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s, padding 0.3s;
+            background: rgba(15, 23, 42, 0.5);
+            font-size: 14px;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 15px;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .contact {
+            padding: 40px 0;
+            text-align: center;
+            background: rgba(15, 23, 42, 0.5);
+        }
+        
+        .discord-box {
+            background: rgba(88, 101, 242, 0.2);
+            border: 2px solid #5865F2;
+            border-radius: 10px;
+            padding: 25px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .discord-box h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: var(--light-color);
+        }
+        
+        .discord-box p {
+            color: var(--gray-color);
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .discord-btn {
+            display: inline-block;
+            background: #5865F2;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        
+        .discord-btn:hover {
+            background: #4752c4;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(88, 101, 242, 0.3);
+        }
+        
+        footer {
+            background: rgba(15, 23, 42, 0.9);
+            padding: 30px 0 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+        
+        .footer-column h4 {
+            font-size: 16px;
+            margin-bottom: 12px;
+            color: var(--light-color);
+        }
+        
+        .footer-links {
+            list-style: none;
+            font-size: 14px;
+        }
+        
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+        
+        .footer-links a {
+            color: var(--gray-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray-color);
+            font-size: 13px;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 24px;
+            }
+            
+            .hero p {
+                font-size: 14px;
+            }
+            
+            .mini-fps-comparison {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .mini-fps-card {
+                width: 160px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .primary-btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .pricing-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .pricing-tab {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 8px;
+            }
+            
+            .pricing-content.active {
+                grid-template-columns: 1fr;
+            }
+            
+            .obs-card {
+                padding: 20px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-magic"></i> Charm Tweak
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#features">الميزات</a></li>
+                    <li><a href="#pricing">الأسعار</a></li>
+                    <li><a href="#obs">OBS</a></li>
+                    <li><a href="#faq">الأسئلة</a></li>
+                    <li><a href="#contact">التواصل</a></li>
+                </ul>
+                <button class="signup-btn" onclick="window.open('https://discord.gg/gtcxsH4TCD', '_blank')">طلب تويك</button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Charm Tweak لأفضل تجربة ألعاب!</h1>
+                <p>يزيد فريماتك ويخلي اللعب سلس بدون دروبات! تويك شامل لكل ألعابك المفضلة</p>
+                
+                <div class="mini-fps-comparison">
+                    <div class="mini-fps-card before">
+                        <h3 class="mini-fps-title mini-fps-before">قبل التويك</h3>
+                        <div class="mini-fps-counter">30</div>
+                        <div class="mini-fps-status mini-status-bad">أداء ضعيف</div>
+                    </div>
+                    
+                    <div class="mini-fps-card after">
+                        <h3 class="mini-fps-title mini-fps-after">بعد التويك</h3>
+                        <div class="mini-fps-counter">300</div>
+                        <div class="mini-fps-status mini-status-good">أداء ممتاز</div>
+                    </div>
+                </div>
+                
+                <div class="cta-buttons">
+                    <button class="primary-btn" onclick="window.open('https://discord.gg/gtcxsH4TCD', '_blank')">اطلب التويك الآن</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>أسعار خدماتنا</h2>
+                <p>اختر الخدمة المناسبة لاحتياجاتك وميزانيتك</p>
+            </div>
+            
+            <div class="pricing-tabs">
+                <div class="pricing-tab active" data-target="all-games">تويك لجميع الألعاب</div>
+                <div class="pricing-tab" data-target="cod">تويك كود (Call of Duty)</div>
+            </div>
+            
+            <div class="pricing-content active" id="all-games">
+                <div class="pricing-card">
+                    <h3>التويك بدون فورمات</h3>
+                    <div class="price">119 <span>ريال سعودي</span></div>
+                    <ul class="pricing-features">
+                        <li>كل تعديلات الأداء المذكورة</li>
+                        <li>زيادة ملحوظة في الفريمات</li>
+                        <li>تحسين استجابة اللعبة</li>
+                        <li>دعم فني 24 ساعة</li>
+                    </ul>
+                    <button class="primary-btn" onclick="window.open('https://discord.gg/gtcxsH4TCD', '_blank')">اطلب الآن</button>
+                </div>
+                <div class="pricing-card">
+                    <h3>التويك مع الفورمات</h3>
+                    <div class="price">159 <span>ريال سعودي</span></div>
+                    <ul class="pricing-features">
+                        <li>كل مزايا الباقة الأساسية</li>
+                        <li>فورمات كامل وتنظيف العميق</li>
+                        <li>تثبيت ويندوز نظيف </li>
+                        <li>تعديل اعدادات البايوس</li>
+                        <li>دعم فني 24 ساعة</li>
+                    </ul>
+                    <button class="primary-btn" onclick="window.open('https://discord.gg/gtcxsH4TCD', '_blank')">اطلب الآن</button>
+                </div>
+            </div>
+            
+            <div class="pricing-content" id="cod">
+                <div class="pricing-card">
+                    <h3>تويك كود بدون فورمات</h3>
+                    <div class="price">139 <span>ريال سعودي</span></div>
+                    <ul class="pricing-features">
+                        <li>تعديلات مخصصة لكود فقط</li>
+                        <li>زيادة كبيرة في الفريمات</li>
+                        <li>تحسين استجابة اللعبة</li>
+                        <li>دعم فني 24 ساعة</li>
+                    </ul>
+                    <button class="primary-btn" onclick="window.open('https://discord.gg/gtcxsH4TCD', '_blank')">اطلب الآن</button>
+                </div>
+                <div class="pricing-card">
+                    <h3>تويك كود مع الفورمات</h3>
+                    <div class="price">179 <span>ريال سعودي</span></div>
+                    <ul class="pricing-features">
+                        <li>كل مزايا الباقة الأساسية</li>
+                        <li>فورمات كامل وتنظيف العميق</li>
+                        <li>تثبيت ويندوز نظيف </li>
+                        <li>تجهيز النظام لأفضل أداء لكود</li>
+                        <li>تعديل اعدادات البايوس</li>
+                        <li>دعم فني 24 ساعة</li>
+                    </ul>
+                    <button class="primary-btn" onclick="window.open('https://discord.gg/gtcxsH4TCD', '_blank')">اطلب الآن</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="obs-section" id="obs">
+        <div class="container">
+            <div class="section-title">
+                <h2>خدمة تعديل إعدادات OBS</h2>
+                <p>لضمان أفضل تجربة أثناء البث</p>
+                
+            </div>
+            
+            <div class="obs-card">
+                <h3>تعديل إعدادات OBS</h3>
+                <div class="obs-price">20 <span>ريال سعودي</span></div>
+                <p class="obs-description">لضمان افضل تجربة أثناء البث وتصوير المقاطع   </p>
+                <button class="primary-btn" onclick="window.open('https://discord.gg/gtcxsH4TCD', '_blank')">اطلب الخدمة</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>ميزات Charm Tweak</h2>
+                <p>تحسينات شاملة تجعل جهازك يعمل بأقصى أداء ممكن للألعاب</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>تعديل إعدادات الويندوز</h3>
+                    <p>تعديلات متقدمة تجعل الويندوز أخف استخدام ممكن ويركز كل قوته على الألعاب</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3>تعديل إعدادات الكرت</h3>
+                    <p>استخدام كامل قوة الكرت بدون كسر سرعة أو ضرر لضمان أعلى فريمات</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3>تعديل ملفات اللعبة</h3>
+                    <p>تعديل الملفات المخفية للعبة لجعل اللعب أكثر سلاسة وأقل استجابة</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mouse"></i>
+                    </div>
+                    <h3>تحسين استجابة الماوس واليد</h3>
+                    <p>تعديل إعدادات سرعة اليد والماوس والكيبورد لأفضل تجربة تحكم</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                    <h3>تحسين إعدادات النت</h3>
+                    <p>حل مشاكل تأخير الطلقات وجعل النت يركز تركيز أكبر على الجهاز</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <h3>تنظيف النظام</h3>
+                    <p>إزالة الملفات غير الضرورية وتحرير مساحة الهارد وتحسين الأداء العام</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>الأسئلة الشائعة</h2>
+                <p>إجابات على الأسئلة الأكثر شيوعاً حول خدماتنا</p>
+            </div>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>هل قبل اسوي تويك من عندكم احتاج افرمت؟</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>لا طبعاً، ولكن يفضل بحيث تاخذ كل أداء التويك والتجربة بالكامل عشان تضمن التويك والفرق الفعلي ويدوم فترة أطول!</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>هل التويك يروح بعد فتره من اسويه؟</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>لا  التويك يبقى إلا إذا قمت بعمل فورمات أو تحديثات كبيرة للنظام.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>ينفع اكون مسوي تويك ثاني واسوي فوقه التويك حقكم؟</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>لا ماينفع، تويك فوق تويك ممكن يضرك بدال ينفعك. نفضل انك تجينا مو مسوي ولا تويك في ويندوز.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>هل التويك يقلل من عمر الجهاز؟</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>لا طبعاً، تويكنا تعديلاته امنه بدون اي كسر سرعة للقطع ومافيها ايضرر للقطع.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>هل التويك بيفيدني لو كنت استخدم الجهاز لأغراض أخرى غير الألعاب?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>نعم، راح يفيدك من ناحية التصفح وسلاسة النظام وبيقل الديلاي وراح ينفعك في جميع اشغالك.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>وش يعني استخدام مرة للتويك؟</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>الاستخدام مرة يعني تسوي التويك مرة وحدة بالجهاز ولو فرمت تشتري من جديد.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>هل التويك بيرفع فريماتي ويقلل الديلاي؟</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>نعم، التويك بيحسن أداء جهازك كبيرة حسب مواصفات جهازك.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>هل التويك يبند في الالعاب؟</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>لا التويك امن !</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>كيف تطلب الخدمة؟</h2>
+                <p>انضم إلى سيرفر الديسكورد واطلب الخدمة مباشرة</p>
+            </div>
+            
+            <div class="discord-box">
+                <h3>انضم إلى سيرفر الديسكورد</h3>
+                <p>انقر على الزر بالأسفل للانضمام إلى سيرفرنا وطلب الخدمة مباشرة من هناك</p>
+                <a href="https://discord.gg/gtcxsH4TCD" class="discord-btn" target="_blank">
+                    <i class="fab fa-discord"></i> انضم إلى الديسكورد
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h4>Charm Tweak</h4>
+                    <p>نقدم لكم أفضل خدمات تحسين أداء الألعاب وزيادة الفريمات لكل أنواع الأجهزة</p>
+                </div>
+                <div class="footer-column">
+                    <h4>خدماتنا</h4>
+                    <ul class="footer-links">
+                        <li><a href="#pricing">تويك لجميع الألعاب</a></li>
+                        <li><a href="#pricing">تويك كود (Call of Duty)</a></li>
+                        <li><a href="#obs">تعديل OBS للبث</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>معلومات</h4>
+                    <ul class="footer-links">
+                        <li><a href="#faq">الأسئلة الشائعة</a></li>
+                        <li><a href="#">شروط الخدمة</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© Charm Tweak.   .</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    item.classList.toggle('active');
+                });
+            });
+            
+            const pricingTabs = document.querySelectorAll('.pricing-tab');
+            const pricingContents = document.querySelectorAll('.pricing-content');
+            
+            pricingTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const target = tab.getAttribute('data-target');
+                    
+                    pricingTabs.forEach(t => t.classList.remove('active'));
+                    pricingContents.forEach(c => c.classList.remove('active'));
+                    
+                    tab.classList.add('active');
+                    document.getElementById(target).classList.add('active');
+                });
+            });
+            
+            const miniFpsBefore = document.querySelector('.mini-fps-card.before .mini-fps-counter');
+            const miniFpsAfter = document.querySelector('.mini-fps-card.after .mini-fps-counter');
+            
+            function animateCounter(element, target, duration) {
+                let start = 0;
+                const increment = target / (duration / 16);
+                
+                const updateCounter = () => {
+                    start += increment;
+                    if (start < target) {
+                        element.textContent = Math.floor(start);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        element.textContent = target;
+                    }
+                };
+                
+                updateCounter();
+            }
+            
+            setTimeout(() => {
+                animateCounter(miniFpsBefore, 30, 800);
+                setTimeout(() => {
+                    animateCounter(miniFpsAfter, 300, 1200);
+                }, 400);
+            }, 500);
+        });
+    </script>
+</body>
+</html>
